@@ -14,6 +14,7 @@ This homework has been done by the following members of **GROUP 9**:
 * [Luis José Sánchez](https://github.com/LuisJoseSanchez)
 * Full name
 * Full name
+
 ...
 
 ## Exercise statement
