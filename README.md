@@ -1,36 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AI and GPT Bootcamp. Homework for week 2.
 
-## Getting Started
+<img src="images/encodeclub.png" height="72">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/AIGPT_bootcamp.png" height="72">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/python_logo.png" height="72">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/jupyter.png" height="72">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/colab.png" height="69">
 
-First, run the development server:
+## Introduction
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+In this repo you will find the code and documentation of the **homework for week 2** of the 
+**Encode Club AI and GPT Bootcamp Q3 2024**.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The main goal of this assignment is...
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This homework has been done by the following members of **GROUP 9**:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+* [Luis José Sánchez](https://github.com/LuisJoseSanchez)
+* Full name
+* Full name
+...
 
-## Learn More
+## Exercise statement
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The exercise statement is in the [Weekend Project](https://github.com/Encode-Club-AI-Bootcamp/Generative-AI-Applications/tree/main/Lesson-08#weekend-project) section, at the end of **Lesson 8**.
