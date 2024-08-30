@@ -5,7 +5,7 @@ import { useChat } from "ai/react";
 import Icon from '@mdi/react';
 import { mdiAccount, mdiVolumeHigh, mdiImageArea, mdiCheck } from '@mdi/js';
 export default function Chat() {
-  const { messages, append, isLoading } = useChat();
+  const { messages, append, isLoading, error } = useChat();
 
   const genres = [
     { emoji: "🧙", value: "Fantasy" },
@@ -164,6 +164,13 @@ export default function Chat() {
             </div>
             {/* main section end */}
           </div>
+
+          {/* error handling code */}
+          {error && (
+            <div className="bg-red-500 text-white p-4 rounded-lg mt-4">
+              {error.message}
+            </div>
+          )}
         </div>
       </div>
       <style>
