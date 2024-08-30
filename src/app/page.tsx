@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useChat } from "ai/react";
 
 export default function Chat() {
-  const { messages, append, isLoading } = useChat();
+  const { messages, append, isLoading, error } = useChat();
 
   const genres = [
     { emoji: "🧙", value: "Fantasy" },
@@ -95,56 +95,6 @@ export default function Chat() {
             </div>
           </div>
 
-          {/* genre selection */}
-          <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
-            <h3 className="text-xl font-semibold">Genre</h3>
-
-            <div className="flex flex-wrap justify-center">
-              {genres.map(({ value, emoji }) => (
-                <div
-                  key={value}
-                  className="p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg"
-                >
-                  <input
-                    id={value}
-                    type="radio"
-                    value={value}
-                    name="genre"
-                    onChange={handleChange}
-                  />
-                  <label className="ml-2" htmlFor={value}>
-                    {`${emoji} ${value}`}
-                  </label>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* tone selection code */}
-          <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
-            <h3 className="text-xl font-semibold">Tones</h3>
-
-            <div className="flex flex-wrap justify-center">
-              {tones.map(({ value, emoji }) => (
-                <div
-                  key={value}
-                  className="p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg"
-                >
-                  <input
-                    id={value}
-                    type="radio"
-                    name="tone"
-                    value={value}
-                    onChange={handleChange}
-                  />
-                  <label className="ml-2" htmlFor={value}>
-                    {`${emoji} ${value}`}
-                  </label>
-                </div>
-              ))}
-            </div>
-          </div>
-
           {/* button selection code */}
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
@@ -169,6 +119,13 @@ export default function Chat() {
           >
             {messages[messages.length - 1]?.content}
           </div>
+
+          {/* error handling code */}
+          {error && (
+            <div className="bg-red-500 text-white p-4 rounded-lg mt-4">
+              {error.message}
+            </div>
+          )}
         </div>
       </div>
     </main>
