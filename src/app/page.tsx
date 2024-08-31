@@ -126,29 +126,27 @@ export default function Chat() {
 
 
               {/* button selection code */}
-              <div className="mt-2 flex py-5">
+              <div className="mt-2 flex py-5 h-15 justify-center items-center align-center">
+ 
+                  <button className="flex  align-center  justify-center rounded-full  hover:bg-gray-600   py-2 px-2 mr-2  "
+                  > <Icon path={mdiVolumeHigh} size={1} /></button>
 
-                <div className=" rounded-full bg-blue-500   py-2 px-4 mr-5 space-x-4">
-                  <button> <Icon path={mdiVolumeHigh} size={1} /></button>
-                  <button> <Icon path={mdiImageArea} size={1} /></button>
-                </div>
-
-                <button title="Evaluate the generated joke" className="flex mx-2 bg-green-300 hover:bg-green-700 text-white font-bold py-2 px-2  rounded   disabled:opacity-50"
+                <button title="Evaluate the generated joke" className="flex mx-2 bg-green-300 hover:bg-green-700 text-white font-bold py-2 px-2  rounded-full   disabled:opacity-50"
                   disabled={messages.length == 0}
-
                 >
                   <Icon path={mdiCheck} size={1} />
                 </button>
 
+                  <div className="flex flex-auto  p-2    bg-opacity-50 bg-gray-700">
 
-
-                <input
-                  className="flex-auto pl-3 h-12 mr-5 pr-28 py-2 bg-transparent placeholder:text-slate-400 text-slate-400 text-sm border border-slate-200 rounded transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
+                  <button title="Generate Joke from image" className="flex justify-center  rounded bg-opacity-50 bg-gray-700  py-4 px-4 mr-5">
+                     <Icon path={mdiImageArea} size={1} />
+                     </button>
+                  <input
+                  className="flex-auto pl-3 h-12 mr-5 pr-28 py-2 bg-transparent placeholder:text-slate-400 text-slate-400 text-sm   transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
                   placeholder="Specify a topic you want the joke to be about."
                 />
-
-
-                <button
+                     <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
                   disabled={isLoading || !state.genre || !state.tone}
                   onClick={() =>
@@ -160,6 +158,12 @@ export default function Chat() {
                 >
                   Generate Joke
                 </button>
+                  </div>
+
+            
+
+
+           
               </div>
 
 
