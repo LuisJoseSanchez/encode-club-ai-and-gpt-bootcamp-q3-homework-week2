@@ -1,5 +1,17 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Prerequisites
+- create a file: `src/.env.local`
+- it is ignored by gitignore already
+- add you OpenAI API Key into this file
+```bash
+OPENAI_API_KEY="your-openai-api-key-here"
+```
+- install dependencies (from `package.json`)
+```bash
+npm install
+```
+
 ## Getting Started
 
 First, run the development server:
