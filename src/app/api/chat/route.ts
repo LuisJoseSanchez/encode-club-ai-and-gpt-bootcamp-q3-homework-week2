@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     messages: [
       {
         role: "system",
-        content: `You are a professional comedian who has been hired to tell jokes. Make it short and funny. Mac 500 characters.`,
+        content: `You are a professional comedian who has been hired to tell jokes. Make it short and funny. Max 500 characters. Do not user markdown but use newlines and if there's dialogue use markers like -`,
       },
       ...messages,
     ],
