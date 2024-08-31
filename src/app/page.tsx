@@ -14,6 +14,9 @@ const styles = {
     height: "calc(70vh - 150px)",
     overflowY: "auto",
   },
+  sidebar:{
+    overflowY:'auto'
+  }
 };
 
 export default function Chat() {
@@ -68,7 +71,7 @@ export default function Chat() {
             style={styles.mainContainer}
           >
             {/* Generator options sidebar */}
-            <div className="basis-1/4 bg-opacity-25 bg-gray-700 rounded-lg p-4 mr-2">
+            <div className="basis-1/2 bg-opacity-25 bg-gray-700 rounded-lg p-4 mr-2 sidebar-container" style={styles.sidebar}>
               <div className="space-y-4 bg-opacity-25 bg-gray-700 r  p-4 border-b-solid border-b-2 border-gray-500">
                 <h3 className="text-xl font-semibold ">Generator Options</h3>
               </div>
@@ -123,7 +126,7 @@ export default function Chat() {
             </div>
 
             {/* Main content area */}
-            <div className="basis-3/4 flex-none bg-opacity-25 bg-gray-700 rounded-lg p-4">
+            <div className="basis-1/2 flex-none bg-opacity-25 bg-gray-700 rounded-lg p-4">
               {/* Chat messages display */}
               <div
                 className="content-section border-solid rounded-lg border-2 border-gray-500 m-2"
@@ -150,7 +153,7 @@ export default function Chat() {
 
                 <button
                   title="Evaluate the generated joke"
-                  className="flex mx-2 bg-green-300 hover:bg-green-700 text-white font-bold py-2 px-2 rounded-full disabled:opacity-50"
+                  className="flex mx-2 bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-2 rounded-full disabled:opacity-50"
                   disabled={messages.length == 0}
                 >
                   <Icon path={mdiCheck} size={1} />
