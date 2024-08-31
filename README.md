@@ -21,3 +21,7 @@ This homework has been done by the following members of **GROUP 9**:
 ## Exercise statement
 
 The exercise statement is in the [Weekend Project](https://github.com/Encode-Club-AI-Bootcamp/Generative-AI-Applications/tree/main/Lesson-08#weekend-project) section, at the end of **Lesson 8**.
+
+<hr>
+
+Please, give a ⭐ if you liked this repo!
