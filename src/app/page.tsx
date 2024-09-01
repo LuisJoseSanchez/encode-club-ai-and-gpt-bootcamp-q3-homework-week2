@@ -3,8 +3,7 @@
 import { CSSProperties, useState, useEffect, useRef } from "react";
 import { useChat } from "ai/react";
 import Icon from "@mdi/react";
-import { mdiAccount, mdiVolumeHigh, mdiImageArea, mdiCheck } from "@mdi/js";
-<<<<<<< HEAD
+import { mdiVolumeHigh, mdiImageArea, mdiCheck } from "@mdi/js";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,9 +27,8 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ChevronDownIcon, CrossCircledIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-=======
 import ReactMarkdown from 'react-markdown';
->>>>>>> main
+
 
 // Define styles in a separate object
 const styles: { [key: string]: CSSProperties } = {
@@ -127,6 +125,28 @@ export default function Chat() {
       updateResponseHistory(response);
     }
   }, [isLoading, messages]);
+  
+  useEffect(() => {
+    // Scroll to bottom after evaluation state is updated and component re-renders
+    if (contentSectionRef.current) {
+      contentSectionRef.current.scrollTop = contentSectionRef.current.scrollHeight;
+    }
+  }, [evaluation]);
+
+  const evaluateJoke = async () => {
+    if (messages.length > 0) {
+      const joke = messages[messages.length - 1].content;
+      const response = await fetch('/api/evaluate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ joke }),
+      });
+      const data = await response.json();
+      setEvaluation(data.evaluation);
+    }
+  };
 
   return (
     <main className="mx-auto w-full p-10 flex flex-col">
@@ -254,16 +274,10 @@ export default function Chat() {
                   <Icon path={mdiVolumeHigh} size={1} />
                 </button>
 
-<<<<<<< HEAD
                 {/* TODO: Implement feature for button to evaluate the generated joke https://github.com/LuisJoseSanchez/encode-club-ai-and-gpt-bootcamp-q3-homework-week2/issues/7*/}
                 <button
                   title="Evaluate the generated joke"
                   className="flex mx-2 bg-green-300 hover:bg-green-700 text-white font-bold py-2 px-2  rounded-full   disabled:opacity-50"
-=======
-                <button
-                  title="Evaluate the generated joke"
-                  className="flex mx-2 bg-green-300 hover:bg-green-700 text-white font-bold py-2 px-2 rounded-full disabled:opacity-50"
->>>>>>> main
                   disabled={messages.length == 0}
                   onClick={evaluateJoke}
                 >
