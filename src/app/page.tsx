@@ -44,8 +44,9 @@ export default function Chat() {
     topic: "",
   });
 
-  // State to store request history
+  // State to store request history and OpenAI responses
   const [requestHistory, setRequestHistory] = useState([]);
+  const [responseHistory, setResponseHistory] = useState([]);
 
   // Handle changes in genre and tone selection
   const handleChange = ({
@@ -67,7 +68,12 @@ export default function Chat() {
 
   // Function to update request history
   const updateRequestHistory = (request: string) => {
-    setRequestHistory([...requestHistory, request]);
+    setRequestHistory(prevHistory => [...prevHistory, request]);
+  };
+
+  // Function to update OpenAI responses
+  const updateResponseHistory = (response: string) => {
+    setResponseHistory(prevHistory => [...prevHistory, response]);
   };
 
   // Function to send request to OpenAI and update request history
@@ -83,8 +89,12 @@ export default function Chat() {
   useEffect(() => {
     if (isLoading) {
       // Assuming there's a function to send the request to OpenAI
+    } else if (messages.length > 0) {
+      // Assuming the OpenAI response is the last message
+      const response = messages[messages.length - 1].content;
+      updateResponseHistory(response);
     }
-  }, [isLoading]);
+  }, [isLoading, messages]);
 
   return (
     <main className="mx-auto w-full p-24 flex flex-col">
@@ -213,13 +223,20 @@ export default function Chat() {
             </div>
           )}
 
-          {/* Request history display */}
+          {/* Request and Response history display */}
           <div className="mt-4">
-            <h3 className="text-xl font-semibold">Request History</h3>
+            <h3 className="text-xl font-semibold">History</h3>
             <ul>
               {requestHistory.map((request, index) => (
-                <li key={index} className="text-white">
-                  {request}
+                <li key={index} className="text-white flex flex-col">
+                  <span className="font-bold">Request:</span>
+                  <span>{request}</span>
+                  {responseHistory[index] && (
+                    <>
+                      <span className="font-bold">Response:</span>
+                      <span>{responseHistory[index]}</span>
+                    </>
+                  )}
                 </li>
               ))}
             </ul>
