@@ -28,7 +28,7 @@ export default function Chat() {
 
   const handleChange = ({
     target: { name, value },
-  }: React.ChangeEvent<HTMLInputElement>) => {
+  }: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setState({
       ...state,
       [name]: value,
@@ -59,50 +59,38 @@ export default function Chat() {
               <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
                 <h3 className="text-xl font-semibold">Genre</h3>
 
-                <div className="flex flex-wrap justify-center">
+                <select
+                  name="genre"
+                  value={state.genre}
+                  onChange={handleChange}
+                  className="form-select block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                >
+                  <option value="">Select a genre</option>
                   {genres.map(({ value, emoji }) => (
-                    <div
-                      key={value}
-                      className="p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg"
-                    >
-                      <input
-                        id={value}
-                        type="radio"
-                        value={value}
-                        name="genre"
-                        onChange={handleChange}
-                      />
-                      <label className="ml-2" htmlFor={value}>
-                        {`${emoji} ${value}`}
-                      </label>
-                    </div>
+                    <option key={value} value={value}>
+                      {`${emoji} ${value}`}
+                    </option>
                   ))}
-                </div>
+                </select>
               </div>
 
               {/* tone selection code */}
               <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
                 <h3 className="text-xl font-semibold">Tones</h3>
 
-                <div className="flex flex-wrap justify-center">
+                <select
+                  name="tone"
+                  value={state.tone}
+                  onChange={handleChange}
+                  className="form-select block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                >
+                  <option value="">Select a tone</option>
                   {tones.map(({ value, emoji }) => (
-                    <div
-                      key={value}
-                      className="p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg"
-                    >
-                      <input
-                        id={value}
-                        type="radio"
-                        name="tone"
-                        value={value}
-                        onChange={handleChange}
-                      />
-                      <label className="ml-2" htmlFor={value}>
-                        {`${emoji} ${value}`}
-                      </label>
-                    </div>
+                    <option key={value} value={value}>
+                      {`${emoji} ${value}`}
+                    </option>
                   ))}
-                </div>
+                </select>
               </div>
 
             </div>
