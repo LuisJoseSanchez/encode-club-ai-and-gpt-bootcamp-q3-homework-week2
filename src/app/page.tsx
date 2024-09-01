@@ -182,7 +182,7 @@ export default function Chat() {
                       variant="outline"
                       className="w-full justify-between"
                     >
-                      {state.genre || "Select a genre"}
+                      {state.genre ? `${genres.find(g => g.value === state.genre)?.emoji || '🎭'} ${state.genre}` : "🎭 Select a genre"}
                       <ChevronDownIcon className="ml-2 h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
@@ -215,7 +215,7 @@ export default function Chat() {
                       variant="outline"
                       className="w-full justify-between"
                     >
-                      {state.tone || "Select a tone"}
+                      {state.tone ? `${tones.find(t => t.value === state.tone)?.emoji || '🎨'} ${state.tone}` : "🎨 Select a tone"}
                       <ChevronDownIcon className="ml-2 h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
