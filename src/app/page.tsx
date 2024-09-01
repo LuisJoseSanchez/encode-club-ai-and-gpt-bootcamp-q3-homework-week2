@@ -63,7 +63,7 @@ export default function Chat() {
                   name="genre"
                   value={state.genre}
                   onChange={handleChange}
-                  className="form-select block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="form-select block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white text-black"
                 >
                   <option value="">Select a genre</option>
                   {genres.map(({ value, emoji }) => (
@@ -82,7 +82,7 @@ export default function Chat() {
                   name="tone"
                   value={state.tone}
                   onChange={handleChange}
-                  className="form-select block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="form-select block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white text-black"
                 >
                   <option value="">Select a tone</option>
                   {tones.map(({ value, emoji }) => (
