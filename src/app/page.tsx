@@ -1,9 +1,10 @@
 "use client";
 
-import { CSSProperties, useState, useEffect } from "react";
+import { CSSProperties, useState, useEffect, useRef } from "react";
 import { useChat } from "ai/react";
 import Icon from "@mdi/react";
 import { mdiAccount, mdiVolumeHigh, mdiImageArea, mdiCheck } from "@mdi/js";
+<<<<<<< HEAD
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,6 +28,9 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ChevronDownIcon, CrossCircledIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+=======
+import ReactMarkdown from 'react-markdown';
+>>>>>>> main
 
 // Define styles in a separate object
 const styles: { [key: string]: CSSProperties } = {
@@ -44,6 +48,7 @@ const styles: { [key: string]: CSSProperties } = {
 
 export default function Chat() {
   const { messages, append, isLoading, error } = useChat();
+  const contentSectionRef = useRef<HTMLDivElement>(null);
 
   // Define genre and tone options
   const genres = [
@@ -70,6 +75,9 @@ export default function Chat() {
   // State to store request history and OpenAI responses
   const [requestHistory, setRequestHistory] = useState([]);
   const [responseHistory, setResponseHistory] = useState([]);
+
+  // State to store evaluation history
+  const [evaluation, setEvaluation] = useState<string | null>(null);
 
   // Handle changes in genre and tone selection
   const handleChange = ({
@@ -111,6 +119,7 @@ export default function Chat() {
 
   useEffect(() => {
     if (isLoading) {
+      setEvaluation(null)
       // Assuming there's a function to send the request to OpenAI
     } else if (messages.length > 0) {
       // Assuming the OpenAI response is the last message
@@ -119,7 +128,6 @@ export default function Chat() {
     }
   }, [isLoading, messages]);
 
-  console.log({ requestHistory });
   return (
     <main className="mx-auto w-full p-10 flex flex-col">
       <Card className="w-full">
@@ -215,6 +223,7 @@ export default function Chat() {
             <div className="basis-1/2 flex-none bg-opacity-25 bg-gray-700 rounded-lg p-4">
               {/* Chat messages display */}
               <div
+                ref={contentSectionRef}
                 className="content-section border-solid rounded-lg border-2 border-gray-500 m-2"
                 style={styles.contentSection}
               >
@@ -227,7 +236,14 @@ export default function Chat() {
                   }
                   className="bg-opacity-25 bg-gray-700 rounded-lg p-4"
                 >
-                  {messages[messages.length - 1]?.content}
+                  <div className="text-white mt-2">
+                    <ReactMarkdown>{messages[messages.length - 1]?.content}</ReactMarkdown>
+                  </div>
+                  {evaluation && (
+                    <div className="text-green-500 mt-2">
+                      Evaluation: <ReactMarkdown>{evaluation}</ReactMarkdown>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -238,11 +254,18 @@ export default function Chat() {
                   <Icon path={mdiVolumeHigh} size={1} />
                 </button>
 
+<<<<<<< HEAD
                 {/* TODO: Implement feature for button to evaluate the generated joke https://github.com/LuisJoseSanchez/encode-club-ai-and-gpt-bootcamp-q3-homework-week2/issues/7*/}
                 <button
                   title="Evaluate the generated joke"
                   className="flex mx-2 bg-green-300 hover:bg-green-700 text-white font-bold py-2 px-2  rounded-full   disabled:opacity-50"
+=======
+                <button
+                  title="Evaluate the generated joke"
+                  className="flex mx-2 bg-green-300 hover:bg-green-700 text-white font-bold py-2 px-2 rounded-full disabled:opacity-50"
+>>>>>>> main
                   disabled={messages.length == 0}
+                  onClick={evaluateJoke}
                 >
                   <Icon path={mdiCheck} size={1} />
                 </button>
