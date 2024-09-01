@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { CSSProperties, useState } from "react";
 import { useChat } from "ai/react";
 import Icon from "@mdi/react";
 import { mdiAccount, mdiVolumeHigh, mdiImageArea, mdiCheck } from "@mdi/js";
 
 // Define styles in a separate object
-const styles = {
+const styles: { [key: string]: CSSProperties } = {
   mainContainer: {
     height: "70vh",
   },
@@ -14,9 +14,9 @@ const styles = {
     height: "calc(70vh - 150px)",
     overflowY: "auto",
   },
-  sidebar:{
-    overflowY:'auto'
-  }
+  sidebar: {
+    overflowY: "auto",
+  },
 };
 
 export default function Chat() {
@@ -41,6 +41,7 @@ export default function Chat() {
   const [state, setState] = useState({
     genre: "",
     tone: "",
+    topic: "",
   });
 
   // Handle changes in genre and tone selection
@@ -50,6 +51,14 @@ export default function Chat() {
     setState({
       ...state,
       [name]: value,
+    });
+  };
+
+  // Handle changes in topic input
+  const handleTopicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setState({
+      ...state,
+      topic: e.target.value,
     });
   };
 
@@ -158,26 +167,22 @@ export default function Chat() {
                   <input
                     className="flex-auto pl-3 h-12 mr-5 pr-28 py-2 bg-transparent placeholder:text-slate-400 text-slate-400 text-sm   transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
                     placeholder="Specify a topic you want the joke to be about."
+                    value={state.topic}
+                    onChange={handleTopicChange}
                   />
                   <button
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
-                    disabled={isLoading || !state.genre || !state.tone}
+                    disabled={isLoading || !state.genre || !state.tone || !state.topic}
                     onClick={() =>
                       append({
                         role: "user",
-                        content: `Generate a ${state.genre} story in a ${state.tone} tone`,
+                        content: `Generate a ${state.genre} story in a ${state.tone} tone about ${state.topic}`,
                       })
                     }
                   >
                     Generate Joke
                   </button>
-                  
-                  </div>
-
-            
-
-
-           
+                </div>
               </div>
             </div>
           </div>
