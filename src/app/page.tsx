@@ -1,6 +1,6 @@
 "use client";
 
-import { CSSProperties, useState } from "react";
+import { CSSProperties, useState, useEffect } from "react";
 import { useChat } from "ai/react";
 import Icon from "@mdi/react";
 import { mdiAccount, mdiVolumeHigh, mdiImageArea, mdiCheck } from "@mdi/js";
@@ -44,6 +44,9 @@ export default function Chat() {
     topic: "",
   });
 
+  // State to store request history
+  const [requestHistory, setRequestHistory] = useState([]);
+
   // Handle changes in genre and tone selection
   const handleChange = ({
     target: { name, value },
@@ -61,6 +64,27 @@ export default function Chat() {
       topic: e.target.value,
     });
   };
+
+  // Function to update request history
+  const updateRequestHistory = (request: string) => {
+    setRequestHistory([...requestHistory, request]);
+  };
+
+  // Function to send request to OpenAI and update request history
+  const sendRequestToOpenAI = () => {
+    const request = `Generate a ${state.genre} story in a ${state.tone} tone about ${state.topic}`;
+    updateRequestHistory(request);
+    append({
+      role: "user",
+      content: request,
+    });
+  };
+
+  useEffect(() => {
+    if (isLoading) {
+      // Assuming there's a function to send the request to OpenAI
+    }
+  }, [isLoading]);
 
   return (
     <main className="mx-auto w-full p-24 flex flex-col">
@@ -173,12 +197,7 @@ export default function Chat() {
                   <button
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
                     disabled={isLoading || !state.genre || !state.tone || !state.topic}
-                    onClick={() =>
-                      append({
-                        role: "user",
-                        content: `Generate a ${state.genre} story in a ${state.tone} tone about ${state.topic}`,
-                      })
-                    }
+                    onClick={sendRequestToOpenAI}
                   >
                     Generate Joke
                   </button>
@@ -186,13 +205,25 @@ export default function Chat() {
               </div>
             </div>
           </div>
-
+          
           {/* error handling code */}
           {error && (
             <div className="bg-red-500 text-white p-4 rounded-lg mt-4">
               {error.message}
             </div>
           )}
+
+          {/* Request history display */}
+          <div className="mt-4">
+            <h3 className="text-xl font-semibold">Request History</h3>
+            <ul>
+              {requestHistory.map((request, index) => (
+                <li key={index} className="text-white">
+                  {request}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </main>
