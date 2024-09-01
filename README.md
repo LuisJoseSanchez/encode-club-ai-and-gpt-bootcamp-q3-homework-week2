@@ -7,7 +7,7 @@
 In this repo you will find the code and documentation of the **homework for week 2** of the 
 **Encode Club AI and GPT Bootcamp Q3 2024**.
 
-The main goal of this assignment is...
+The main goal of this assignment is....
 
 This homework has been done by the following members of **GROUP 9**:
 
