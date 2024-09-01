@@ -1,11 +1,24 @@
 import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
+import { RateLimiterMemory } from 'rate-limiter-flexible';
 
 const openai = new OpenAI();
+
+const rateLimiter = new RateLimiterMemory({
+  points: 1, // Number of points
+  duration: 3600, // Per hour
+});
 
 export const runtime = "edge";
 
 export async function POST(req: Request) {
+  try {
+    const ip = req.headers.get('x-forwarded-for') || req.headers.get('remoteAddress') || 'unknown';
+    await rateLimiter.consume(ip);
+  } catch (rateLimiterRes) {
+    return new Response(JSON.stringify({ error: 'Too many requests, please try again later.' }), { status: 429 });
+  }
+
   const { messages } = await req.json();
 
   const response = await openai.chat.completions.create({

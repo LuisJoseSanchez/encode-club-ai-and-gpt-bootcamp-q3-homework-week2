@@ -20,8 +20,7 @@ const styles = {
 };
 
 export default function Chat() {
-  // Use the useChat hook to manage chat state and API interactions
-  const { messages, append, isLoading } = useChat();
+  const { messages, append, isLoading, error } = useChat();
 
   // Define genre and tone options
   const genres = [
@@ -47,7 +46,7 @@ export default function Chat() {
   // Handle changes in genre and tone selection
   const handleChange = ({
     target: { name, value },
-  }: React.ChangeEvent<HTMLInputElement>) => {
+  }: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setState({
       ...state,
       [name]: value,
@@ -79,49 +78,39 @@ export default function Chat() {
               {/* Genre selection */}
               <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
                 <h3 className="text-xl font-semibold">Genre</h3>
-                <div className="flex flex-wrap justify-center">
+
+                <select
+                  name="genre"
+                  value={state.genre}
+                  onChange={handleChange}
+                  className="form-select block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white text-black"
+                >
+                  <option value="">Select a genre</option>
                   {genres.map(({ value, emoji }) => (
-                    <div
-                      key={value}
-                      className="p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg"
-                    >
-                      <input
-                        id={value}
-                        type="radio"
-                        value={value}
-                        name="genre"
-                        onChange={handleChange}
-                      />
-                      <label className="ml-2" htmlFor={value}>
-                        {`${emoji} ${value}`}
-                      </label>
-                    </div>
+                    <option key={value} value={value}>
+                      {`${emoji} ${value}`}
+                    </option>
                   ))}
-                </div>
+                </select>
               </div>
 
               {/* Tone selection */}
               <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
                 <h3 className="text-xl font-semibold">Tones</h3>
-                <div className="flex flex-wrap justify-center">
+
+                <select
+                  name="tone"
+                  value={state.tone}
+                  onChange={handleChange}
+                  className="form-select block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white text-black"
+                >
+                  <option value="">Select a tone</option>
                   {tones.map(({ value, emoji }) => (
-                    <div
-                      key={value}
-                      className="p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg"
-                    >
-                      <input
-                        id={value}
-                        type="radio"
-                        name="tone"
-                        value={value}
-                        onChange={handleChange}
-                      />
-                      <label className="ml-2" htmlFor={value}>
-                        {`${emoji} ${value}`}
-                      </label>
-                    </div>
+                    <option key={value} value={value}>
+                      {`${emoji} ${value}`}
+                    </option>
                   ))}
-                </div>
+                </select>
               </div>
             </div>
 
@@ -147,30 +136,29 @@ export default function Chat() {
 
               {/* Control buttons and input */}
               <div className="mt-2 flex py-5 h-15 justify-center items-center align-center">
-                <button className="flex align-center justify-center rounded-full hover:bg-gray-600 py-2 px-2 mr-2">
+                
+                {/* TODO: Implement voice feature*/}
+                <button className="flex  align-center  justify-center rounded-full  hover:bg-gray-600   py-2 px-2 mr-2  "> 
                   <Icon path={mdiVolumeHigh} size={1} />
                 </button>
 
-                <button
-                  title="Evaluate the generated joke"
-                  className="flex mx-2 bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-2 rounded-full disabled:opacity-50"
+                {/* TODO: Implement feature for button to evaluate the generated joke https://github.com/LuisJoseSanchez/encode-club-ai-and-gpt-bootcamp-q3-homework-week2/issues/7*/}
+                <button title="Evaluate the generated joke" className="flex mx-2 bg-green-300 hover:bg-green-700 text-white font-bold py-2 px-2  rounded-full   disabled:opacity-50"
                   disabled={messages.length == 0}
                 >
                   <Icon path={mdiCheck} size={1} />
                 </button>
 
-                <div className="flex flex-auto p-2 bg-opacity-50 bg-gray-700">
-                  <button
-                    title="Generate Joke from image"
-                    className="flex justify-center rounded bg-opacity-50 bg-gray-700 py-4 px-4 mr-5"
-                  >
-                    <Icon path={mdiImageArea} size={1} />
+                <div className="flex flex-auto  p-2    bg-opacity-50 bg-gray-700">
+
+                  {/* TODO: Implement feature for button to generate a joke from an image */}
+                  <button title="Generate Joke from image" className="flex justify-center  rounded bg-opacity-50 bg-gray-700  py-4 px-4 mr-5">
+                     <Icon path={mdiImageArea} size={1} />
                   </button>
                   <input
-                    className="flex-auto pl-3 h-12 mr-5 pr-28 py-2 bg-transparent placeholder:text-slate-400 text-slate-400 text-sm transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
+                    className="flex-auto pl-3 h-12 mr-5 pr-28 py-2 bg-transparent placeholder:text-slate-400 text-slate-400 text-sm   transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
                     placeholder="Specify a topic you want the joke to be about."
                   />
-                  {/* Generate Joke button */}
                   <button
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
                     disabled={isLoading || !state.genre || !state.tone}
@@ -183,10 +171,23 @@ export default function Chat() {
                   >
                     Generate Joke
                   </button>
-                </div>
+                  
+                  </div>
+
+            
+
+
+           
               </div>
             </div>
           </div>
+
+          {/* error handling code */}
+          {error && (
+            <div className="bg-red-500 text-white p-4 rounded-lg mt-4">
+              {error.message}
+            </div>
+          )}
         </div>
       </div>
     </main>
