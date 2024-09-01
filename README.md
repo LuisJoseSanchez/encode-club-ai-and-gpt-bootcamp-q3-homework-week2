@@ -16,6 +16,7 @@ This homework has been done by the following members of **GROUP 9**:
 * [Razvan Ionescu](https://github.com/ionescu77)
 * [Amr Fayez](https://github.com/amrfayez)
 * [Maria Kachalova](https://github.com/MaryFox)
+* [Akash Pathak](https://github.com/akkikumar72)
 
 ...
 
