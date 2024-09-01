@@ -15,10 +15,9 @@ This homework has been done by the following members of **GROUP 9**:
 * [Oleksii Bondarenko](https://github.com/alexmazaltov)
 * [Razvan Ionescu](https://github.com/ionescu77)
 * [Amr Fayez](https://github.com/amrfayez)
-* [Maria Kachalova](https://github.com/MaryFox)
 * [Akash Pathak](https://github.com/akkikumar72)
 * [Ahmed Yassin](https://github.com/AYassin01)
-
+* [Maria Kachalova](https://github.com/MaryFox)
 ...
 
 ## Exercise statement
