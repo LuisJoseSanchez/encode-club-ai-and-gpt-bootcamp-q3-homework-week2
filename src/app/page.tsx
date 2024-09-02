@@ -33,7 +33,7 @@ import ReactMarkdown from 'react-markdown';
 // Define styles in a separate object
 const styles: { [key: string]: CSSProperties } = {
   mainContainer: {
-    height: "70vh",
+    height: "auto",
   },
   contentSection: {
     height: "calc(70vh - 150px)",
@@ -41,6 +41,11 @@ const styles: { [key: string]: CSSProperties } = {
   },
   sidebar: {
     overflowY: "auto",
+    maxHeight: "calc(70vh-150px)", // Ensure the sidebar is not cropped by height on small screens
+  },
+  controlButtons: {
+    width: "100%", // Ensure the control buttons section takes full width
+    overflowX: "auto", // Allow horizontal scrolling if needed
   },
 };
 
@@ -158,10 +163,11 @@ export default function Chat() {
             Discover dad jokes, puns, and one-liners for endless laughs!
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent 
+          style={styles.mainContainer}
+        >
           <div
             className="flex flex-col md:flex-row main-container w-full"
-            style={styles.mainContainer}
           >
             {/* Generator options sidebar */}
             <div
@@ -206,7 +212,7 @@ export default function Chat() {
               </div>
 
               {/* Tone selection */}
-              <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
+              <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4 md:w-full">
                 <h3 className="text-xl font-semibold">Tones</h3>
 
                 <DropdownMenu>
@@ -266,61 +272,54 @@ export default function Chat() {
                   )}
                 </div>
               </div>
-
-              {/* Control buttons and input */}
-              <div className="mt-2 flex flex-col md:flex-row py-5 h-15 justify-center items-center align-center">
-                {/* TODO: Implement voice feature*/}
-                <button className="flex align-center justify-center rounded-full hover:bg-gray-600 py-2 px-2 mr-2 mb-2 md:mb-0">
-                  <Icon path={mdiVolumeHigh} size={1} />
-                </button>
-
-                {/* TODO: Implement feature for button to evaluate the generated joke https://github.com/LuisJoseSanchez/encode-club-ai-and-gpt-bootcamp-q3-homework-week2/issues/7*/}
-                <button
-                  title="Evaluate the generated joke"
-                  className="flex mx-2 bg-green-300 hover:bg-green-700 text-white font-bold py-2 px-2 rounded-full disabled:opacity-50 mb-2 md:mb-0"
-                  disabled={messages.length == 0}
-                  onClick={evaluateJoke}
-                >
-                  <Icon path={mdiCheck} size={1} />
-                </button>
-
-                <div className="flex flex-col md:flex-row flex-auto p-2 bg-opacity-50 bg-gray-700">
-                  {/* TODO: Implement feature for button to generate a joke from an image */}
-                  <button
-                    title="Generate Joke from image"
-                    className="flex justify-center rounded bg-opacity-50 bg-gray-700 py-4 px-4 mr-5 mb-2 md:mb-0"
-                  >
-                    <Icon path={mdiImageArea} size={1} />
-                  </button>
-                  <input
-                    className="flex-auto pl-3 h-12 mr-5 pr-28 py-2 bg-transparent placeholder:text-slate-400 text-slate-400 text-sm transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md mb-2 md:mb-0"
-                    placeholder="Specify a topic you want the joke to be about."
-                    value={state.topic}
-                    onChange={handleTopicChange}
-                  />
-                  <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
-                    disabled={
-                      isLoading || !state.genre || !state.tone || !state.topic
-                    }
-                    onClick={sendRequestToOpenAI}
-                  >
-                    Generate Joke
-                  </button>
-                </div>
-              </div>
             </div>
           </div>
-        </CardContent>
-        <CardFooter className="flex flex-col md:flex-row justify-between">
-          {/* error handling code */}
-          {error && (
-            <Alert variant="destructive" className="mb-4 md:mb-0">
-              <CrossCircledIcon className="h-4 w-4" />
-              <AlertTitle>Error</AlertTitle>
-              <AlertDescription>{error.message}</AlertDescription>
-            </Alert>
-          )}
+          
+          {/* Control buttons and input */}
+          <div className="mt-2 flex flex-col md:flex-row py-5 h-auto justify-center items-center align-center" 
+            style={styles.controlButtons}
+          >
+            {/* TODO: Implement voice feature*/}
+            <button className="flex align-center justify-center rounded-full hover:bg-gray-600 py-2 px-2 mr-2 mb-2 md:mb-0">
+              <Icon path={mdiVolumeHigh} size={1} />
+            </button>
+
+            {/* TODO: Implement feature for button to evaluate the generated joke https://github.com/LuisJoseSanchez/encode-club-ai-and-gpt-bootcamp-q3-homework-week2/issues/7*/}
+            <button
+              title="Evaluate the generated joke"
+              className="flex mx-2 bg-green-300 hover:bg-green-700 text-white font-bold py-2 px-2 rounded-full disabled:opacity-50 mb-2 md:mb-0"
+              disabled={messages.length == 0}
+              onClick={evaluateJoke}
+            >
+              <Icon path={mdiCheck} size={1} />
+            </button>
+
+            <div className="flex flex-col md:flex-row flex-auto p-2 bg-opacity-50 bg-gray-700">
+              {/* TODO: Implement feature for button to generate a joke from an image */}
+              <button
+                title="Generate Joke from image"
+                className="flex justify-center rounded bg-opacity-50 bg-gray-700 py-4 px-4 mr-5 mb-2 md:mb-0"
+              >
+                <Icon path={mdiImageArea} size={1} />
+              </button>
+              <input
+                className="flex-auto pl-3 h-12 mr-5 pr-28 py-2 bg-transparent placeholder:text-slate-400 text-slate-400 text-sm transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md mb-2 md:mb-0"
+                placeholder="Specify a topic you want the joke to be about."
+                value={state.topic}
+                onChange={handleTopicChange}
+              />
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
+                disabled={
+                  isLoading || !state.genre || !state.tone || !state.topic
+                }
+                onClick={sendRequestToOpenAI}
+              >
+                Generate Joke
+              </button>
+            </div>
+          </div>
+
 
           {/* Request and Response history display */}
           <div className="mt-4 w-full">
@@ -343,6 +342,16 @@ export default function Chat() {
               </ul>
             </ScrollArea>
           </div>
+        </CardContent>
+        <CardFooter className="flex flex-col md:flex-row justify-between">
+          {/* error handling code */}
+          {error && (
+            <Alert variant="destructive" className="mb-4 md:mb-0">
+              <CrossCircledIcon className="h-4 w-4" />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>{error.message}</AlertDescription>
+            </Alert>
+          )}
         </CardFooter>
       </Card>
     </main>
