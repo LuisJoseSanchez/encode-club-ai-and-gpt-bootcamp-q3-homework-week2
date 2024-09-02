@@ -160,12 +160,12 @@ export default function Chat() {
         </CardHeader>
         <CardContent>
           <div
-            className="flex flex-none flex-row main-container w-full"
+            className="flex flex-col md:flex-row main-container w-full"
             style={styles.mainContainer}
           >
             {/* Generator options sidebar */}
             <div
-              className="basis-1/2 bg-opacity-25 bg-gray-700 rounded-lg p-4 mr-2 sidebar-container"
+              className="basis-full md:basis-1/2 bg-opacity-25 bg-gray-700 rounded-lg p-4 mr-2 sidebar-container"
               style={styles.sidebar}
             >
               <div className="space-y-4 bg-opacity-25 bg-gray-700 r  p-4 border-b-solid border-b-2 border-gray-500">
@@ -240,7 +240,7 @@ export default function Chat() {
             </div>
 
             {/* Main content area */}
-            <div className="basis-1/2 flex-none bg-opacity-25 bg-gray-700 rounded-lg p-4">
+            <div className="basis-full md:basis-1/2 flex-none bg-opacity-25 bg-gray-700 rounded-lg p-4 mt-4 md:mt-0">
               {/* Chat messages display */}
               <div
                 ref={contentSectionRef}
@@ -268,32 +268,32 @@ export default function Chat() {
               </div>
 
               {/* Control buttons and input */}
-              <div className="mt-2 flex py-5 h-15 justify-center items-center align-center">
+              <div className="mt-2 flex flex-col md:flex-row py-5 h-15 justify-center items-center align-center">
                 {/* TODO: Implement voice feature*/}
-                <button className="flex  align-center  justify-center rounded-full  hover:bg-gray-600   py-2 px-2 mr-2  ">
+                <button className="flex align-center justify-center rounded-full hover:bg-gray-600 py-2 px-2 mr-2 mb-2 md:mb-0">
                   <Icon path={mdiVolumeHigh} size={1} />
                 </button>
 
                 {/* TODO: Implement feature for button to evaluate the generated joke https://github.com/LuisJoseSanchez/encode-club-ai-and-gpt-bootcamp-q3-homework-week2/issues/7*/}
                 <button
                   title="Evaluate the generated joke"
-                  className="flex mx-2 bg-green-300 hover:bg-green-700 text-white font-bold py-2 px-2  rounded-full   disabled:opacity-50"
+                  className="flex mx-2 bg-green-300 hover:bg-green-700 text-white font-bold py-2 px-2 rounded-full disabled:opacity-50 mb-2 md:mb-0"
                   disabled={messages.length == 0}
                   onClick={evaluateJoke}
                 >
                   <Icon path={mdiCheck} size={1} />
                 </button>
 
-                <div className="flex flex-auto  p-2    bg-opacity-50 bg-gray-700">
+                <div className="flex flex-col md:flex-row flex-auto p-2 bg-opacity-50 bg-gray-700">
                   {/* TODO: Implement feature for button to generate a joke from an image */}
                   <button
                     title="Generate Joke from image"
-                    className="flex justify-center  rounded bg-opacity-50 bg-gray-700  py-4 px-4 mr-5"
+                    className="flex justify-center rounded bg-opacity-50 bg-gray-700 py-4 px-4 mr-5 mb-2 md:mb-0"
                   >
                     <Icon path={mdiImageArea} size={1} />
                   </button>
                   <input
-                    className="flex-auto pl-3 h-12 mr-5 pr-28 py-2 bg-transparent placeholder:text-slate-400 text-slate-400 text-sm   transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
+                    className="flex-auto pl-3 h-12 mr-5 pr-28 py-2 bg-transparent placeholder:text-slate-400 text-slate-400 text-sm transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md mb-2 md:mb-0"
                     placeholder="Specify a topic you want the joke to be about."
                     value={state.topic}
                     onChange={handleTopicChange}
@@ -312,10 +312,10 @@ export default function Chat() {
             </div>
           </div>
         </CardContent>
-        <CardFooter className="flex justify-between">
+        <CardFooter className="flex flex-col md:flex-row justify-between">
           {/* error handling code */}
           {error && (
-            <Alert variant="destructive">
+            <Alert variant="destructive" className="mb-4 md:mb-0">
               <CrossCircledIcon className="h-4 w-4" />
               <AlertTitle>Error</AlertTitle>
               <AlertDescription>{error.message}</AlertDescription>

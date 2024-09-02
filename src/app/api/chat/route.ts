@@ -5,7 +5,7 @@ import { RateLimiterMemory } from 'rate-limiter-flexible';
 const openai = new OpenAI();
 
 const rateLimiter = new RateLimiterMemory({
-  points: 10, // Number of requests per hour (10 requests per hour), limit is reset if update page
+  points: 1, // Number of requests per hour (10 requests per hour), limit is reset if update page
   duration: 3600, // Per hour
 });
 
