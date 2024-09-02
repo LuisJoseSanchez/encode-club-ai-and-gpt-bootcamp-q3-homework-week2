@@ -19,6 +19,10 @@ This homework has been done by the following members of **GROUP 9**:
 * [Ahmed Yassin](https://github.com/AYassin01)
 * [Maria Kachalova](https://github.com/MaryFox)
 ...
+  
+## Installation
+
+Check here the [installation guide README](src/README.md) for the project.
 
 ## Exercise statement
 
