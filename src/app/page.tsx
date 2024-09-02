@@ -45,11 +45,11 @@ const styles: { [key: string]: CSSProperties } = {
     maxHeight: "none",
   },
   controlButtons: {
-    width: "100%", // Ensure the control buttons section takes full width
+    width: "100%",
     display: "flex",
-    flexWrap: "wrap", // Allow wrapping on small screens
-    justifyContent: "center", // Center the content
-    gap: "0.5rem", // Add some space between elements
+    flexDirection: "column",
+    alignItems: "stretch",
+    gap: "0.5rem",
   },
 };
 
@@ -276,50 +276,48 @@ export default function Chat() {
           </div>
           
           {/* Control buttons and input */}
-          <div className="mt-2 flex flex-col md:flex-row py-5 h-auto justify-center items-center align-center" 
-            style={styles.controlButtons}
-          >
-            {/* TODO: Implement voice feature*/}
-            <button className="flex align-center justify-center rounded-full hover:bg-gray-600 py-2 px-2">
-              <Icon path={mdiVolumeHigh} size={1} />
-            </button>
+          <div className="mt-2 flex flex-col py-5 w-full" style={styles.controlButtons}>
+            <div className="flex justify-center space-x-2 mb-2">
+              {/* TODO: Implement voice feature*/}
+              <button className="flex items-center justify-center rounded-full hover:bg-gray-600 p-2">
+                <Icon path={mdiVolumeHigh} size={1} />
+              </button>
 
-            {/* TODO: Implement feature for button to evaluate the generated joke https://github.com/LuisJoseSanchez/encode-club-ai-and-gpt-bootcamp-q3-homework-week2/issues/7*/}
-            <button
-              title="Evaluate the generated joke"
-              className="flex bg-green-300 hover:bg-green-700 text-white font-bold py-2 px-2 rounded-full disabled:opacity-50"
-              disabled={messages.length == 0}
-              onClick={evaluateJoke}
-            >
-              <Icon path={mdiCheck} size={1} />
-            </button>
+              {/* TODO: Implement feature for button to evaluate the generated joke */}
+              <button
+                title="Evaluate the generated joke"
+                className="flex items-center justify-center bg-green-300 hover:bg-green-700 text-white font-bold p-2 rounded-full disabled:opacity-50"
+                disabled={messages.length == 0}
+                onClick={evaluateJoke}
+              >
+                <Icon path={mdiCheck} size={1} />
+              </button>
 
-            <div className="flex flex-col md:flex-row flex-auto p-2 bg-opacity-50 bg-gray-700">
               {/* TODO: Implement feature for button to generate a joke from an image */}
               <button
                 title="Generate Joke from image"
-                className="flex justify-center rounded bg-opacity-50 bg-gray-700 py-4 px-4"
+                className="flex items-center justify-center rounded bg-opacity-50 bg-gray-700 p-2"
               >
                 <Icon path={mdiImageArea} size={1} />
               </button>
+            </div>
+
+            <div className="flex flex-col w-full bg-opacity-50 bg-gray-700 p-2 rounded">
               <input
-                className="flex-auto pl-3 h-12 pr-28 py-2 bg-transparent placeholder:text-slate-400 text-slate-400 text-sm transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
+                className="w-full pl-3 h-12 mb-2 bg-transparent placeholder:text-slate-400 text-slate-400 text-sm transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md rounded"
                 placeholder="Specify a topic you want the joke to be about."
                 value={state.topic}
                 onChange={handleTopicChange}
               />
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
-                disabled={
-                  isLoading || !state.genre || !state.tone || !state.topic
-                }
+                className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
+                disabled={isLoading || !state.genre || !state.tone || !state.topic}
                 onClick={sendRequestToOpenAI}
               >
                 Generate Joke
               </button>
             </div>
           </div>
-
 
           {/* Request and Response history display */}
           <div className="mt-4 w-full">
