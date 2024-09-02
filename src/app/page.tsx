@@ -46,7 +46,10 @@ const styles: { [key: string]: CSSProperties } = {
   },
   controlButtons: {
     width: "100%", // Ensure the control buttons section takes full width
-    overflowX: "auto", // Allow horizontal scrolling if needed
+    display: "flex",
+    flexWrap: "wrap", // Allow wrapping on small screens
+    justifyContent: "center", // Center the content
+    gap: "0.5rem", // Add some space between elements
   },
 };
 
@@ -277,14 +280,14 @@ export default function Chat() {
             style={styles.controlButtons}
           >
             {/* TODO: Implement voice feature*/}
-            <button className="flex align-center justify-center rounded-full hover:bg-gray-600 py-2 px-2 mr-2 mb-2 md:mb-0">
+            <button className="flex align-center justify-center rounded-full hover:bg-gray-600 py-2 px-2">
               <Icon path={mdiVolumeHigh} size={1} />
             </button>
 
             {/* TODO: Implement feature for button to evaluate the generated joke https://github.com/LuisJoseSanchez/encode-club-ai-and-gpt-bootcamp-q3-homework-week2/issues/7*/}
             <button
               title="Evaluate the generated joke"
-              className="flex mx-2 bg-green-300 hover:bg-green-700 text-white font-bold py-2 px-2 rounded-full disabled:opacity-50 mb-2 md:mb-0"
+              className="flex bg-green-300 hover:bg-green-700 text-white font-bold py-2 px-2 rounded-full disabled:opacity-50"
               disabled={messages.length == 0}
               onClick={evaluateJoke}
             >
@@ -295,12 +298,12 @@ export default function Chat() {
               {/* TODO: Implement feature for button to generate a joke from an image */}
               <button
                 title="Generate Joke from image"
-                className="flex justify-center rounded bg-opacity-50 bg-gray-700 py-4 px-4 mr-5 mb-2 md:mb-0"
+                className="flex justify-center rounded bg-opacity-50 bg-gray-700 py-4 px-4"
               >
                 <Icon path={mdiImageArea} size={1} />
               </button>
               <input
-                className="flex-auto pl-3 h-12 mr-5 pr-28 py-2 bg-transparent placeholder:text-slate-400 text-slate-400 text-sm transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md mb-2 md:mb-0"
+                className="flex-auto pl-3 h-12 pr-28 py-2 bg-transparent placeholder:text-slate-400 text-slate-400 text-sm transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
                 placeholder="Specify a topic you want the joke to be about."
                 value={state.topic}
                 onChange={handleTopicChange}
