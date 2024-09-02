@@ -34,6 +34,7 @@ import ReactMarkdown from 'react-markdown';
 const styles: { [key: string]: CSSProperties } = {
   mainContainer: {
     height: "auto",
+    minHeight: "70vh",
   },
   contentSection: {
     height: "calc(70vh - 150px)",
@@ -41,7 +42,7 @@ const styles: { [key: string]: CSSProperties } = {
   },
   sidebar: {
     overflowY: "auto",
-    maxHeight: "calc(70vh-150px)", // Ensure the sidebar is not cropped by height on small screens
+    maxHeight: "none",
   },
   controlButtons: {
     width: "100%", // Ensure the control buttons section takes full width
@@ -163,12 +164,8 @@ export default function Chat() {
             Discover dad jokes, puns, and one-liners for endless laughs!
           </CardDescription>
         </CardHeader>
-        <CardContent 
-          style={styles.mainContainer}
-        >
-          <div
-            className="flex flex-col md:flex-row main-container w-full"
-          >
+        <CardContent style={styles.mainContainer}>
+          <div className="flex flex-col md:flex-row main-container w-full">
             {/* Generator options sidebar */}
             <div
               className="basis-full md:basis-1/2 bg-opacity-25 bg-gray-700 rounded-lg p-4 mr-2 sidebar-container"
